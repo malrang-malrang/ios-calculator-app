@@ -6,7 +6,7 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var presentValue: UILabel!
     @IBOutlet weak var presentOperator: UILabel!
@@ -20,6 +20,12 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         removeHistory()
     }
+}
+
+
+// MARK: - Action
+
+extension CalculatorViewController {
     
     @IBAction private func didTapOperand(sender: UIButton) {
         guard let buttonLabel = sender.titleLabel?.text else { return }
@@ -126,7 +132,7 @@ extension UIScrollView {
     }
 }
 
-extension ViewController {
+extension CalculatorViewController {
     
     private func removeHistory() {
         stackView.subviews.forEach{ (view) in view.removeFromSuperview() }
@@ -149,21 +155,21 @@ extension ViewController {
     }
     
      private func pushStackView(operandText: String?, operatorText: String?) -> UIStackView {
-        let operand = UILabel()
-        let `operator` = UILabel()
+        let operandLabel = UILabel()
+        let operatorLabel = UILabel()
         
-        operand.text = operandText
-        `operator`.text = operatorText
-        operand.textColor = .white
-        `operator`.textColor = .white
+        operandLabel.text = operandText
+        operatorLabel.text = operatorText
+        operandLabel.textColor = .white
+        operatorLabel.textColor = .white
         
         let newStackView = UIStackView()
         newStackView.axis = .horizontal
         newStackView.distribution = .fill
         newStackView.spacing = 10
         
-        newStackView.addArrangedSubview(operand)
-        newStackView.addArrangedSubview(`operator`)
+        newStackView.addArrangedSubview(operandLabel)
+        newStackView.addArrangedSubview(operatorLabel)
         return newStackView
     }
 }
